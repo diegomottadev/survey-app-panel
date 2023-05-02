@@ -6,18 +6,18 @@ const AppInlineProfile = (props) => {
     const menuRef = useRef(null);
     const profileClassName = classNames('layout-profile', { 'layout-profile-active': props.inlineMenuActive });
     const menuitemLinkTabindex = !props.inlineMenuActive ? '-1' : null;
-
+    console.log(props.user)
     return (
         <div className={profileClassName}>
             <button type="button" onClick={props.onProfileButtonClick} className="p-link layout-profile-button">
-                <img src="assets/layout/images/avatar.png" alt="babylon-layout" />
+                <img src="assets/layout/images/avatar/avatar.png" alt="babylon-layout" />
                 <div className="layout-profile-userinfo">
-                    <span className="layout-profile-name">Arlene Welch</span>
-                    <span className="layout-profile-role">Design Ops</span>
+                    <span className="layout-profile-name">{props.user?.user.name}</span>
+                    <span className="layout-profile-role"></span>
                 </div>
-                <i className="layout-profile-icon pi pi-angle-down"></i>
+                {/* <i className="layout-profile-icon pi pi-angle-down"></i> */}
             </button>
-            <CSSTransition nodeRef={menuRef} classNames="layout-profile-menu" in={props.inlineMenuActive} timeout={{ enter: 1000, exit: 400 }} unmountOnExit>
+            {/* <CSSTransition nodeRef={menuRef} classNames="layout-profile-menu" in={props.inlineMenuActive} timeout={{ enter: 1000, exit: 400 }} unmountOnExit>
                 <ul ref={menuRef} className="layout-profile-menu">
                     <li role="menuitem">
                         <button type="button" className="p-link" tabIndex={menuitemLinkTabindex}>
@@ -44,7 +44,7 @@ const AppInlineProfile = (props) => {
                         </button>
                     </li>
                 </ul>
-            </CSSTransition>
+            </CSSTransition> */}
         </div>
     );
 };

@@ -20,5 +20,5 @@ export const login = async (email, password) => {
 }
 
 export const me = async () => {
-    return await Axios.post(`${BASE_URL}/auth/me`); //data.usuario, data.token
+    return await Axios.get(`${BASE_URL}/auth/me`); //data.usuario, data.token
 }

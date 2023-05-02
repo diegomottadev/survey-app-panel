@@ -26,8 +26,14 @@ class PointOfSaleService {
 
     all = async (params) => {
 
-        let url = `${POINT_OF_SALES_API_BASE_URL}?page=${params.page+1}`;
-        if(params.search!==null){
+        let url = `${POINT_OF_SALES_API_BASE_URL}?page=${1}&pageSize=`;
+
+        if(params && params.page !== null){
+        
+            url = `${POINT_OF_SALES_API_BASE_URL}?page=${params.page+1}`;
+        }
+        
+        if(params &&  params.search!==null){
             let keys = Object.keys(params.search);
             url = `${POINT_OF_SALES_API_BASE_URL}?page=${1}&${keys[0]}=${params.search.name}`;
         }

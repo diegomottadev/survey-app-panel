@@ -42,6 +42,9 @@ import Survey from './pages/surveys/Survey';
 import PointOfSale from './pages/pointOfSales/PointOfSale';
 import PointOfSaleImport from './pages/pointOfSales/components/PointOfSaleImport';
 import PointOfSaleForm from './pages/pointOfSales/forms/PointOfSaleForm';
+import EmptyPage from './pages/empty/EmptyPage';
+import PointOfSaleView from './pages/pointOfSales/forms/PointOfSaleView';
+import PointOfSalesAllView from './pages/pointOfSales/PointOfSalesAllView';
 
 
 
@@ -97,11 +100,11 @@ const App = () => {
     // ];
 
     const menu = [
-        {
-            label: 'Home Page',
-            icon: 'pi pi-fw pi-home',
-            items: [{ label: 'General', icon: 'pi pi-fw pi-home', to: '/' }]
-        },
+        // {
+        //     label: 'Home Page',
+        //     icon: 'pi pi-fw pi-home',
+        //     items: [{ label: 'General', icon: 'pi pi-fw pi-home', to: '/' }]
+        // },
         {
             label: 'Encuentas',
             icon: 'pi pi-fw pi-sitemap',
@@ -133,13 +136,13 @@ const App = () => {
 
     useEffect(() => {
         async function cargandoUsuario() {
+
             if (isExpired) {
                 setCargandoUsuario(false);
                 return;
             }
             try {
                 const { data } = await me();
-                // console.log('user',data);
                 setUsuario(data);
                 setCargandoUsuario(false)
             } catch (error) {
@@ -359,14 +362,14 @@ const App = () => {
                 />
     
                 <div className={menuContainerClassName} onClick={onMenuClick}>
-                    <div className="layout-menu-logo">
+                    {/* <div className="layout-menu-logo">
                         <button className="p-link" onClick={() => navigate('/')}>
                             <img id="layout-menu-logo" src="assets/layout/images/logo-white.png" library="babylon-layout" alt="babylon-logo" />
                         </button>
-                    </div>
+                    </div> */}
                     <div className="layout-menu-wrapper">
                         <div className="menu-scroll-content">
-                            {hasInlineProfile && <AppInlineProfile inlineMenuActive={inlineMenuActive} onProfileButtonClick={onProfileButtonClick} />}
+                            {hasInlineProfile && <AppInlineProfile inlineMenuActive={inlineMenuActive} onProfileButtonClick={onProfileButtonClick} user={usuario} />}
                             <AppMenu model={menu} menuMode={menuMode} active={menuActive} onMenuitemClick={onMenuitemClick} onRootMenuitemClick={onRootMenuitemClick} />
                         </div>
                     </div>
@@ -375,15 +378,18 @@ const App = () => {
                 <div className="layout-main">
 
                         <Routes>
-                            <Route exact path="/" element={<Dashboard />} />
+                            <Route exact path="/" element={<EmptyPage />} />
                             <Route exact path="/results" element={<Survey />} />
                             <Route exact path="/pointOfSales" element={<PointOfSale />} />
                             <Route exact path="/pointOfSales/new" element={<PointOfSaleForm />} />
                             <Route exact path="/pointOfSales/:pointOfSaleId/edit" element={<PointOfSaleForm />} />
+                            <Route exact path="/pointOfSales/:pointOfSaleId/detail" element={<PointOfSaleView />} />
+                            <Route exact path="/pointOfSales/printAll" element={<PointOfSalesAllView />} />
+
                             <Route exact path="/pointOfSales/import" element={<PointOfSaleImport />} />
                         </Routes>
     
-                    <AppFooter />
+                    {/* <AppFooter /> */}
                 </div>
     
                 <AppConfig

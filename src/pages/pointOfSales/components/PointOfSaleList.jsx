@@ -68,6 +68,10 @@ const PointOfSaleList = () => {
         navigate(`/pointOfSales/${pointOfSaleId}/edit`);
     }
 
+    const onDetailPointOfSale = (pointOfSaleId) => {
+        navigate(`/pointOfSales/${pointOfSaleId}/detail`);
+    }
+
     const onDeletePointOfSale = (pointOfSaleId) => {
         Swal.fire({
             title: '',
@@ -109,6 +113,7 @@ const PointOfSaleList = () => {
             <div className="actions">
                 <Button tooltip={"Editar"}  tooltipOptions={{ position: 'top' }} icon="pi pi-pencil" className="p-button-raised p-button-success p-mr-2" onClick={() => onEditPointOfSale(rowData.id)} />
                 <Button tooltip={"Eliminar"}  tooltipOptions={{ position: 'top' }} icon="pi pi-trash" className="p-button-raised p-button-danger p-mr-2" onClick={() => onDeletePointOfSale(rowData.id)} />
+                <Button tooltip={"Ver"}  tooltipOptions={{ position: 'top' }} icon="pi pi-eye" className="p-button-raised p-button-info p-mr-2" onClick={() => onDetailPointOfSale(rowData.id)} />
 
                 {/* <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteTeacher(rowData)} /> */}
             </div>
@@ -129,7 +134,7 @@ const PointOfSaleList = () => {
 
     if(showError){
         return(
-                <Error mensaje={'Hubo un problema con la carga del listado de categorias'}></Error>
+                <Error mensaje={'Hubo un problema con la carga del listado de puntos de ventas'}></Error>
         );
     } 
 

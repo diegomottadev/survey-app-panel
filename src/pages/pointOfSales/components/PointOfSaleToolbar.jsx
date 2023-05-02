@@ -15,6 +15,10 @@ const PointOfSaleToolbar = () => {
         navigate('/pointOfSales/new');
     };
 
+    const navigateToPointOfSaleAllView = () => {
+        navigate('/pointOfSales/printAll');
+
+    }
 
     const onExportToExcel = async () => {
         const url = await PointOfSaleService.export();
@@ -30,13 +34,14 @@ const PointOfSaleToolbar = () => {
         return (
             <>
                 <Button label="Nuevo" icon="pi pi-plus-circle" style={{ marginRight: '.5em' }} onClick={navigateToPointOfSaleForm} />
+                <Button label="Imprimir" icon="pi pi-print" className=' p-button-secondary' style={{ marginRight: '.5em' }} onClick={navigateToPointOfSaleAllView} />
             </>
         );
     };
     const toolbarRightTemplate = () => {
         return (
             <>
-                <Button label="Importar" icon="pi pi-upload" className="p-button-info" onClick={onImportExcel} />
+                <Button label="Importar" icon="pi pi-upload" style={{ marginRight: '.5em' }} className="p-button-info" onClick={onImportExcel} />
                 <Button label="Exportar" icon="pi pi-file-excel" className="p-button-secondary" onClick={onExportToExcel} />
             </>
         );
