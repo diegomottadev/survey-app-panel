@@ -3,16 +3,9 @@ import { classNames } from 'primereact/utils';
 import { BrowserRouter as Router ,Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 
 import AppTopbarP from './AppTopbarP';
-import AppFooter from './AppFooter';
 import AppConfig from './AppConfig';
 import AppMenu from './AppMenu';
-import AppBreadcrumb from './AppBreadcrumb';
 import AppInlineProfile from './AppInlineProfile';
-
-import Dashboard from './components/Dashboard';
-import FormLayoutDemo from './components/FormLayoutDemo';
-import InputDemo from './components/InputDemo';
-import FloatLabelDemo from './components/FloatLabelDemo';
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -26,18 +19,11 @@ import './App.scss';
  */
 
 import {  initAxiosInterceptors } from './helpers/auth-helpers';
-import Axios from 'axios';
-import { BASE_URL } from './helpers/BaseUrl';
+
 import { Login } from './pages/Login';
-import Loading from './components/Loading';
-import Error from './components/Error';
+
 import useToken from './hooks/useToken';
-import AxiosInterceptors from './components/_pesitos/AxiosInterceptors';
 import { me } from './services/auth/Authorization';
-import Category from './pages/categories/Category';
-import CategoryForm from './pages/categories/forms/CategoryForm';
-import PaymentMethod from './pages/PaymentMethods/PaymentMethod';
-import PaymentMethodForm from './pages/PaymentMethods/form/PaymentMethodForm';
 import Survey from './pages/surveys/Survey';
 import PointOfSale from './pages/pointOfSales/PointOfSale';
 import PointOfSaleImport from './pages/pointOfSales/components/PointOfSaleImport';
@@ -45,6 +31,8 @@ import PointOfSaleForm from './pages/pointOfSales/forms/PointOfSaleForm';
 import EmptyPage from './pages/empty/EmptyPage';
 import PointOfSaleView from './pages/pointOfSales/forms/PointOfSaleView';
 import PointOfSalesAllView from './pages/pointOfSales/PointOfSalesAllView';
+import ImageBank from './pages/imagesbank/ImageBank';
+import ImageBankImport from './pages/imagesbank/components/imageBankImport';
 
 
 
@@ -121,6 +109,11 @@ const App = () => {
                     label: 'Puntos de ventas',
                     icon: 'pi pi-fw pi-file',
                     to: '/pointOfSales'
+                },
+                {
+                    label: 'Banco de imagenes',
+                    icon: 'pi pi-fw pi-image',
+                    to: '/images'
                 }
             ]
         }
@@ -387,6 +380,8 @@ const App = () => {
                             <Route exact path="/pointOfSales/printAll" element={<PointOfSalesAllView />} />
 
                             <Route exact path="/pointOfSales/import" element={<PointOfSaleImport />} />
+                            <Route exact path="/images" element={<ImageBank />} />
+                            <Route exact path="/images/import" element={<ImageBankImport />} />
                         </Routes>
     
                     {/* <AppFooter /> */}
