@@ -30,6 +30,17 @@ class ImageBankService {
         }
         return await axios.get(url);
     }
+
+    delete = async (imageId) => {
+        const response = await axios.delete(`${IMAGES_API_BASE_URL}/${imageId}`);
+        return response.data;
+    };
+
+    deleteAll = async (imageId) => {
+        const response = await axios.delete(`${IMAGES_API_BASE_URL}/`);
+        return response.data;
+    };
+
 }
 
 export default new ImageBankService();

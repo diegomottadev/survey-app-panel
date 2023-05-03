@@ -64,7 +64,30 @@ const ImageBankList = () => {
         setLazyParams(_lazyParams);
     }
 
-
+    const onDeleteImage = (imageId) => {
+        Swal.fire({
+            title: '',
+            text: '¿Confirma eliminar la imagen permanentemente?',
+            showCancelButton: true,
+            confirmButtonText: `<i class="pi pi-check-circle"></i> Aceptar`,
+            cancelButtonText: `<i class="pi pi-ban"></i> Cancelar`,
+            confirmButtonColor: '#2196F3',
+            cancelButtonColor: '#fbc02d',
+          }).then( async(result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                  let imageDeleted = await ImageBankService.delete(imageId);
+                //   Swal.fire('', `${imageDeleted.message}`, 'success')
+                  toast.current.show({
+                    severity: 'success',
+                    summary: 'Exito',
+                    detail: `${imageDeleted.message}`,
+                    life: 3000,
+                });
+                  setLazyParams({...lazyParams,page: lazyParams.page});
+            } 
+        })
+    }
 
     const header = (
 
@@ -81,7 +104,7 @@ const ImageBankList = () => {
     const actionBodyImage = (rowData) => {
         return (
             <div className="actions">
-                    <img width="100" height="140"
+                    <img width="50" height="70"
                   src={`${IMAGES_API_BASE_URL}/${rowData.name}`}
                   className="img-fluid hover-shadow mx-auto d-block"
                   alt="image_id"
@@ -89,6 +112,17 @@ const ImageBankList = () => {
             </div>
         );
     }
+
+    const actionBodyTemplate = (rowData) => {
+        return (
+            <div className="actions">
+
+                <Button tooltip={"Eliminar"}  tooltipOptions={{ position: 'top' }} icon="pi pi-trash" className="p-button-raised p-button-danger p-mr-2" onClick={() => onDeleteImage(rowData.name)} />
+
+            </div>
+        );
+    }
+
     if(showError){
         return(
                 <Error mensaje={'Hubo un problema con la carga del listado de las imagenes de productos'}></Error>
@@ -107,11 +141,10 @@ const ImageBankList = () => {
                         loading={loadingDatatable}
                         className="p-datatable-gridlines" header={header}
                         >
-                        <Column field="name" header="Cod. Pto. Venta"  headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
-                        <Column field="type" header="Nombre"  ></Column>
-                        <Column field="path" header="Dirección"></Column>
-                        <Column field="filename" header="Ciudad"></Column>
+                        <Column field="name" header="Cod. Imagen"  headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
+                        <Column field="filename" header="Nombre de image"></Column>
                         <Column header="Imagen" body={actionBodyImage}></Column>
+                        <Column  body={actionBodyTemplate}></Column>
                     </DataTable> 
                 </div>
             </div>
