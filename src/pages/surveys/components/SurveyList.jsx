@@ -31,7 +31,7 @@ export const SurveyList = () => {
 
             try {
                 setLoadingDatatable(true);
-                const {data:{data:result, total:total}} =  await SurveyService.all(lazyParams)
+                const {data:{data:{rows:result, count:total}}} =  await SurveyService.all(lazyParams)
                 setTotalRecords(total);
                 setSurveys(result);
                 setLoadingDatatable(false);

@@ -58,8 +58,9 @@ const App = () => {
     /*
       Estados para el funcionamiento del template
     */
-
+  
     const [menuActive, setMenuActive] = useState(false);
+    const [topbarMenuActive, setTopbarMenuActive] = useState(false);
     const [menuMode, setMenuMode] = useState('static');
     const [darkMenu, setDarkMenu] = useState(true);
     const [overlayMenuActive, setOverlayMenuActive] = useState(false);
@@ -343,23 +344,44 @@ const App = () => {
         'p-ripple-disabled': !ripple
     });
 
+    const onTopbarItemClick = (event, item) => {
+ 
+        deleteToken()
+        navigate(`/`);
+        event.preventDefault();
+    };
+
+   const onTopbarMenuActive= ()=>{
+    setTopbarMenuActive(!topbarMenuActive)
+   }
+
     const menuContainerClassName = classNames('layout-menu-container', { 'layout-menu-container-inactive': !isMenuVisible() });
 
     const LoginRoute = () =>{
         return (
             <div className={containerClassName} onClick={onDocumentClick}>
-                <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
-                <AppTopbarP
-                 onMenuButtonClick={onMenuButtonClick}
-                 onTopbarMenuButtonClick={onTopbarMenuButtonClick}
-                />
+
+            <AppTopbarP
+                topbarMenuActive={topbarMenuActive}
+                onMenuButtonClick={onMenuButtonClick}
+                onTopbarMenuButtonClick={onTopbarMenuActive}
+                onTopbarItemClick={onTopbarItemClick}
+                isHorizontal={isHorizontal()}
+                profileMode={profileMode}
+                isMobile={isMobile}
+            />
     
                 <div className={menuContainerClassName} onClick={onMenuClick}>
-                    {/* <div className="layout-menu-logo">
+                    <div className="layout-menu-logo">
                         <button className="p-link" onClick={() => navigate('/')}>
-                            <img id="layout-menu-logo" src="assets/layout/images/logo-white.png" library="babylon-layout" alt="babylon-logo" />
+                            <img id="layout-menu-logo" src="assets/layout/images/_vitalcan/logo_nutrique.png"  style={{
+                                display: 'block',
+                                marginLeft: 'auto',
+                                marginRight: 'auto',
+                                height: '50px'
+                                }} library="babylon-layout" alt="babylon-logo" />
                         </button>
-                    </div> */}
+                    </div>
                     <div className="layout-menu-wrapper">
                         <div className="menu-scroll-content">
                             {hasInlineProfile && <AppInlineProfile inlineMenuActive={inlineMenuActive} onProfileButtonClick={onProfileButtonClick} user={usuario} />}

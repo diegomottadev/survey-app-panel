@@ -86,7 +86,7 @@ const ImageBankImport = () => {
                     <div className="card">
                         <h5>Importar images</h5>
 
-                            <FileUpload cancelLabel="Reiniciar" chooseLabel="Elegir archivo" uploadLabel="Importar" url={`${IMAGES_API_BASE_URL}/`}   name="images[]" multiple accept="image/*"  customUpload uploadHandler={handleFileUpload}  maxFileSize={1000000} />
+                            <FileUpload cancelLabel="Reiniciar" chooseLabel="Elegir archivo" uploadLabel="Importar" url={`${IMAGES_API_BASE_URL}/`}   name="images[]" multiple accept="image/*"  customUpload uploadHandler={handleFileUpload}  maxFileSize={900000000} />
                             <div className="flex justify-content-end mt-2">
                                 <div className="p-d-flex">
                                     <Button
